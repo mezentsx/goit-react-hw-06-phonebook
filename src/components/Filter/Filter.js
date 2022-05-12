@@ -1,10 +1,16 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import s from './Filter.module.css';
-import PropTypes from 'prop-types';
+import actions from '../../redux/contacts/contacts-actions';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default function Filter ({ filter, onFilter }) {
+const Filter = () => {
   const inputFilter = nanoid();
+
+  const value = useSelector(state => state.contacts.filter);
+  const dispatch = useDispatch();
+
+  const onFilter = e => dispatch(actions.searchContact(e.currentTarget.value));
 
   return (
     <>
@@ -13,7 +19,7 @@ export default function Filter ({ filter, onFilter }) {
         <input
           type="text"
           name="filter"
-          value={filter}
+          value={value}
           onChange={onFilter}
           id={inputFilter}
           className={s.input}
@@ -21,9 +27,6 @@ export default function Filter ({ filter, onFilter }) {
       </label>
     </>
   );
-}
-
-Filter.propTypes = {
-  onFilter: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
 };
+
+export default Filter;
