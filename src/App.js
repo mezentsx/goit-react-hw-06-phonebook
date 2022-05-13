@@ -17,7 +17,7 @@ const App = () => {
           <ContactList />
         </>
       ) : (
-        <p>You have no saved contacts</p>
+        <p>You don't have any contacts</p>
       )}
     </div>
   );
